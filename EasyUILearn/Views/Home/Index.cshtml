@@ -1,0 +1,59 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+    <script src="~/Content/EasyUI/jquery.min.js"></script>
+    <script src="~/Content/EasyUI/jquery.easyui.min.js"></script>
+    
+    <link href="~/Content/EasyUI/themes/default/easyui.css" rel="stylesheet" />
+    <link href="~/Content/EasyUI/themes/icon.css" rel="stylesheet" />
+    <link href="~/Content/EasyUI/themes/color.css" rel="stylesheet" />
+</head>
+
+<body class="easyui-layout">
+    <div data-options="region:'north',border:false" style="height: 60px; background: #B3DFDA; padding: 10px; font-size: 20px; font-weight：500;color: #EE7600">EasyUI 学习</div>
+    <div data-options="region:'west',split:true,title:'菜单'" style="width:150px;padding:10px;">
+        <div>
+            
+            <ul id="ctt"></ul>
+        </div>
+    </div>
+    <div data-options="region:'south',border:false" style="height: 40px; background: #CDC9C9; padding: 10px;">当前用户：Admin</div>
+    <div data-options="region:'center'">
+            <div id="tabs" data-options="fit:true" class="easyui-tabs" style="width:500px;height:250px;">
+                <div title="Tab1" style="padding:20px;display:none;">
+                    tab1
+                </div>
+                <div title="Tab2" data-options="closable:true" style="overflow:auto;padding:20px;display:none;">
+                    tab2
+                </div>
+                <div title="Tab3" data-options="iconCls:'icon-reload',closable:true" style="display:none;">
+                    tab3
+                </div>
+            </div>
+    </div>
+    <script>
+        $('#ctt').tree({
+            url: '/Prim/Index',
+            checkbox: true,
+            onClick:function(node)
+            {
+                $('#tabs').tabs('add', {
+                    title: node.text,
+                    selected: true,
+                    index: 0,
+                    content: 'loading...',
+                    href:'/User/Login'
+                });
+            }
+        });
+    </script>
+</body>
+</html>
