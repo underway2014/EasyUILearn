@@ -9,6 +9,12 @@
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>Login</title>
+    <script src="~/Content/EasyUI/jquery.min.js"></script>
+    <script src="~/Content/EasyUI/jquery.easyui.min.js"></script>
+
+    <link href="~/Content/EasyUI/themes/default/easyui.css" rel="stylesheet" />
+    <link href="~/Content/EasyUI/themes/icon.css" rel="stylesheet" />
+    <link href="~/Content/EasyUI/themes/color.css" rel="stylesheet" />
 </head>
 <body>
     <div id="win" class="easyui-window" title="登&nbsp;陆" style="width:300px;height:200px;text-align:center;margin-bottom:20px;"
@@ -30,6 +36,7 @@
             </tr>
         </table>
         <input type="button" id="submit" value="Submit" />
+        <p id="dresult"></p>
     </div>
     <script>
         $('#submit').on('click', function () {
@@ -41,8 +48,15 @@
                     passWord:$("#pw").val()
                 },
                 success: function (msg) {
-                    alert("Data Saved: " + msg);
-                    window.location.href = "/Home/Index";
+                    //alert("Data Saved: " + msg);
+                    if (msg == 1)
+                    {
+                        $('#dresult').text("登陆成功！");
+                        window.location.href = "/Home/Index";
+                        
+                    } else {
+                        $('#dresult').text("用户名或密码错误！");
+                    }
                 }
             });
         });

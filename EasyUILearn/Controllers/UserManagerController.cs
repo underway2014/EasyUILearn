@@ -17,9 +17,14 @@ namespace EasyUILearn.Controllers
         // GET: /UserManager/
         public ActionResult Index()
         {
+
+           // return Json(db.UserModels.ToList(), JsonRequestBehavior.AllowGet);
             return View(db.UserModels.ToList());
         }
-
+        public ActionResult ShowUser()
+        {
+            return Json(db.UserModels.ToList(), JsonRequestBehavior.AllowGet);
+        }
         // GET: /UserManager/Details/5
         public ActionResult Details(int? id)
         {
@@ -57,7 +62,45 @@ namespace EasyUILearn.Controllers
 
             return View(usermodel);
         }
+        [HttpPost]
+        public ActionResult AddUser()
+        {
+            int res = 1;
+            String name = Request.Form["name"];
+            String pwd = Request.Form["passWord"];
+            if(name == "" || pwd == "")
+            {
+                res = -1;
+            }
+            else
+            {
+                UserModel u = new UserModel();
+                u.Name = name;
+                u.PassWord = pwd;
+                db.UserModels.Add(u);
+                db.SaveChanges();
+               // return RedirectToAction("Index");
+            }
+            return Content(res.ToString());
+        }
+        [HttpPost]
+        public ActionResult DeleteUser(int userId)
+        {
+            int res = 1;
+            
+            List<UserModel> userList = db.UserModels.Where(m => m.Id == userId).ToList();
+            if(userList.Count > 0)
+            {
+                db.UserModels.Remove(userList[0]);
+                int line = db.SaveChanges();
+                if(line < 0)
+                {
+                    res = -1;
+                }
+            }
 
+            return Content(res.ToString());
+        }
         // GET: /UserManager/Edit/5
         public ActionResult Edit(int? id)
         {

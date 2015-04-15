@@ -25,11 +25,32 @@ namespace EasyUILearn.Controllers
 
             int result = 1;
             List<UserModel> userList = db.UserModels.Where(m => m.Name == name && m.PassWord == passWord).ToList();
-            if(userList.Count == 0)
+            if(userList.Count > 0)
             {
-                result = 0;//
+                Session["userName"] = userList[0];//成功
             }
+            else
+            {
+                result = -1;//登陆失败
+            }
+            
             return Content(result.ToString());
+        }
+        public ActionResult LoginOff()
+        {
+            int res = 1;
+            try
+            {
+                Session.RemoveAll();
+                Session.Clear();
+            }
+            catch (Exception)
+            {
+
+                res = -1;
+            }
+
+            return Content(res.ToString());
         }
 	}
 }

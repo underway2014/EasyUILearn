@@ -158,10 +158,12 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="Controllers\CustomFilter.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PrimController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Controllers\UserManagerController.cs" />
+    <Compile Include="Controllers\VaildateLoginRoleAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>

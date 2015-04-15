@@ -9,6 +9,7 @@ namespace EasyUILearn.Controllers
     public class HomeController : Controller
     {
         //test
+      [CustomFilter]
         public ActionResult Index()
         {
             return View();
